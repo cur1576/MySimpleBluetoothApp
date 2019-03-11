@@ -72,6 +72,7 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_turn_off" />
 
     <ListView
+        android:id="@+id/list_view_devices"
         android:layout_width="0dp"
         android:layout_height="603dp"
         android:layout_marginStart="8dp"
