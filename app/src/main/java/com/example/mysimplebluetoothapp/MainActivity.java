@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,13 +27,14 @@ public class MainActivity extends AppCompatActivity {
     private BluetoothAdapter bluetoothAdapter;
     private ArrayAdapter<String> arrayAdapter;
     private List<String> list;
+    private Set<BluetoothDevice> bondetDevices;
 
     private final BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             if(BluetoothDevice.ACTION_FOUND.equals(intent.getAction())){
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                String name = device.getAddress();
+                String name = device.getAddress() + " : " + device.getName();
                 arrayAdapter.add(name);
             }
         }
@@ -86,12 +88,17 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void getVisible(View view) {
+        Intent setVisible = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+        setVisible.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION,180);
+        startActivity(setVisible);
     }
 
     public void listDevices(View view) {
+        bondetDevices = bluetoothAdapter.getBondedDevices();
     }
 
     public void searchDevices(View view) {
+        arrayAdapter.clear();
         bluetoothAdapter.startDiscovery();
     }
 }
