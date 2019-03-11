@@ -31,6 +31,9 @@ public class MyBluetoothService {
         this.context = context;
         this.handler = handler;
         adapter = BluetoothAdapter.getDefaultAdapter();
+        if(context instanceof ConnectedDevices){
+            output = ((Activity)context).findViewById(R.id.tv_output);
+        }
 
     }
 

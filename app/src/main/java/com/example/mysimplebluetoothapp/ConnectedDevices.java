@@ -29,11 +29,12 @@ public class ConnectedDevices extends AppCompatActivity {
 
     public synchronized void connAsClient(View view) {
         connAs.setText("Verbunden als Client");
-        String adresse = getIntent().getStringExtra("adresse");
-        client = service.new BluetoothClient(adresse);
+
     }
 
     public synchronized void sendMessage(View view) {
+        String adresse = getIntent().getStringExtra("adresse");
+        client = service.new BluetoothClient(adresse);
         client.start();
     }
 }
