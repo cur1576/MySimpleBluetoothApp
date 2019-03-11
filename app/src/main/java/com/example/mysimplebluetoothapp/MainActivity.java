@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             if(BluetoothDevice.ACTION_FOUND.equals(intent.getAction())){
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                String name = device.getAddress() + " : " + device.getName();
+                String name = device.getAddress() + " - " + device.getName();
                 arrayAdapter.add(name);
             }
         }
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         bondetDevices = bluetoothAdapter.getBondedDevices();
         arrayAdapter.clear();
         for(BluetoothDevice device : bondetDevices){
-            arrayAdapter.add(device.getAddress() + " : " + device.getName());
+            arrayAdapter.add(device.getAddress() + " - " + device.getName());
         }
     }
 
