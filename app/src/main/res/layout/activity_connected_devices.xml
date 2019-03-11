@@ -12,8 +12,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:onClick="connAsServer"
         android:text="verbinden als Server"
+        app:layout_constraintEnd_toStartOf="@+id/btn_client"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,10 +23,12 @@
         android:id="@+id/btn_client"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:onClick="connAsClient"
         android:text="verbinden als Client"
-        tools:layout_editor_absoluteX="211dp"
-        tools:layout_editor_absoluteY="16dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_connAs"
