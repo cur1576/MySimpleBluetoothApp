@@ -1,16 +1,20 @@
 package com.example.mysimplebluetoothapp;
 
+import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 
 import android.os.Handler;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.UUID;
 
 public class MyBluetoothService {
@@ -71,9 +75,40 @@ public class MyBluetoothService {
     }
 
     public class BluetoothClient extends Thread{
+        private final BluetoothDevice device;
+        private BluetoothSocket socket;
 
         public BluetoothClient(String adresse) {
 
+            device = adapter.getRemoteDevice(adresse);
+            BluetoothSocket tmp = null;
+            try {
+                tmp = device.createInsecureRfcommSocketToServiceRecord(UUID_);
+            } catch (IOException e) {
+                Log.e(TAG, "Socketfehler", e);
+            }
+            socket = tmp;
+
+            try {
+                socket.connect();
+            } catch (IOException e) {
+                Log.e(TAG, "Verbindungsfehler", e);
+            }
+
+        }
+
+        public void run(){
+            try {
+                OutputStream outputStream = socket.getOutputStream();
+                EditText input =((Activity)context).findViewById(R.id.et_input);
+                byte[] buffer = input.getText().toString().getBytes();
+                outputStream.write(buffer);
+                outputStream.flush();
+                outputStream.close();
+                socket.close();
+            } catch (IOException e) {
+                Log.e(TAG, "", e);
+            }
         }
     }
 }
