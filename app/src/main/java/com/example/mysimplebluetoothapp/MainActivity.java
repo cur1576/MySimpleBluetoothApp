@@ -2,6 +2,9 @@ package com.example.mysimplebluetoothapp;
 
 import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -22,6 +25,17 @@ public class MainActivity extends AppCompatActivity {
     private BluetoothAdapter bluetoothAdapter;
     private ArrayAdapter<String> arrayAdapter;
     private List<String> list;
+
+    private final BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if(BluetoothDevice.ACTION_FOUND.equals(intent.getAction())){
+                BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                String name = device.getAddress();
+                arrayAdapter.add(name);
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,5 +82,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void searchDevices(View view) {
+        bluetoothAdapter.startDiscovery();
     }
 }
