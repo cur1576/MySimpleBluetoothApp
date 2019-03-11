@@ -21,7 +21,7 @@
         android:id="@+id/btn_client"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="cannAsClient"
+        android:onClick="connAsClient"
         android:text="verbinden als Client"
         tools:layout_editor_absoluteX="211dp"
         tools:layout_editor_absoluteY="16dp" />

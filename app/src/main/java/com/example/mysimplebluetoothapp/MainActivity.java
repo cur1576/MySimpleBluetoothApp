@@ -49,6 +49,13 @@ public class MainActivity extends AppCompatActivity {
         list = new ArrayList<>();
         arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
         listViewDevices.setAdapter(arrayAdapter);
+        listViewDevices.setOnItemClickListener((parent, view,position,id)->{
+            String adresse_plus = (String)parent.getItemAtPosition(position);
+            String adresse = adresse_plus.substring(0,adresse_plus.indexOf(":")).trim();
+            Intent intent = new Intent(MainActivity.this,ConnectedDevices.class);
+            intent.putExtra("adresse",adresse);
+            startActivity(intent);
+        });
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
