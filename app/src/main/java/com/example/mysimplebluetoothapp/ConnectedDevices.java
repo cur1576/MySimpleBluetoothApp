@@ -3,8 +3,14 @@ package com.example.mysimplebluetoothapp;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 public class ConnectedDevices extends AppCompatActivity {
+
+    private MyBluetoothService service;
+    private MyBluetoothService.BluetoothClient client;
+    private TextView connAs;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
