@@ -95,6 +95,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void listDevices(View view) {
         bondetDevices = bluetoothAdapter.getBondedDevices();
+        arrayAdapter.clear();
+        for(BluetoothDevice device : bondetDevices){
+            arrayAdapter.add(device.getAddress() + " : " + device.getName());
+        }
     }
 
     public void searchDevices(View view) {
