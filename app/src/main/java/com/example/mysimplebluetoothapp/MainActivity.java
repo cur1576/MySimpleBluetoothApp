@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         listViewDevices.setAdapter(arrayAdapter);
         listViewDevices.setOnItemClickListener((parent, view,position,id)->{
             String adresse_plus = (String)parent.getItemAtPosition(position);
-            String adresse = adresse_plus.substring(0,adresse_plus.indexOf(":")).trim();
+            String adresse = adresse_plus.substring(0,adresse_plus.indexOf("-")).trim();
             Intent intent = new Intent(MainActivity.this,ConnectedDevices.class);
             intent.putExtra("adresse",adresse);
             startActivity(intent);

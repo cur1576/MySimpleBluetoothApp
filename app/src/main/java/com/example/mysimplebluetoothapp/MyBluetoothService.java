@@ -24,7 +24,8 @@ public class MyBluetoothService {
     private Handler handler;
     private BluetoothAdapter adapter;
     private TextView output;
-    public static final UUID UUID_ = UUID.randomUUID();
+//    public static final UUID UUID_ = UUID.randomUUID();
+    public static final UUID UUID_ = UUID.fromString("fe322ba5-411c-4a59-90ea-ad0688836f19");
     private static final String TAG = MyBluetoothService.class.getSimpleName();
 
     private MyBluetoothService(Context context, Handler handler){
@@ -102,6 +103,7 @@ public class MyBluetoothService {
 
         public void run(){
             try {
+                //socket.connect();
                 OutputStream outputStream = socket.getOutputStream();
                 EditText input =((Activity)context).findViewById(R.id.et_input);
                 byte[] buffer = input.getText().toString().getBytes();
